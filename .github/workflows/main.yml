@@ -24,6 +24,8 @@ jobs:
       with:
         python-version: ${{ matrix.python-version }}
 
+    - name: Install bash
+      run: apt install bash -y
     - name: Install poetry ${{ matrix.poetry-version }}
       run: |
         python -m ensurepip
