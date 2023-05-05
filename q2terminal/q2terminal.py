@@ -10,7 +10,7 @@ class Q2Terminal:
         if terminal is None:
             if "win32" in sys.platform:
                 terminal = "powershell"
-            elif "darwin":
+            elif "darwin" in sys.platform:
                 terminal = "zsh"
             else:
                 terminal = "bash"
