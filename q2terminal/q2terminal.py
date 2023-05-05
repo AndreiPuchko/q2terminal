@@ -7,6 +7,7 @@ class Q2Terminal:
     def __init__(self, terminal=None, echo=False, callback=None):
         self.echo = False
         self.callback = None
+        self.shell = False
         if terminal is None:
             if "win32" in sys.platform:
                 terminal = "powershell"
@@ -14,8 +15,11 @@ class Q2Terminal:
                 terminal = "zsh"
             else:
                 terminal = "/bin/bash"
+        if "win32" not in sys.platform:
+            self.shell =  True
         self.proc = Popen(
             [terminal],
+            shell=self.shell,
             stdin=PIPE,
             stdout=PIPE,
             stderr=STDOUT,
@@ -30,7 +34,7 @@ class Q2Terminal:
             print(f"{ctime()}> {cmd}>")
         _callback = callback if callback else self.callback
         self.exit_code = None
-        cmd = f"{cmd};$?;echo q2eoc\n"
+        cmd = f"{cmd}; echo $?;echo q2eoc\n"
         self.proc.stdin.writelines([bytes(cmd, "utf8")])
         self.proc.stdin.flush()
         rez = []
