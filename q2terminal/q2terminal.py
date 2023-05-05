@@ -13,7 +13,7 @@ class Q2Terminal:
             elif "darwin" in sys.platform:
                 terminal = "zsh"
             else:
-                terminal = "bash"
+                terminal = "/bin/bash"
         self.proc = Popen(
             [terminal],
             stdin=PIPE,
