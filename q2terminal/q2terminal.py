@@ -45,7 +45,13 @@ class Q2Terminal:
 
             if line.strip() == "q2eoc":
                 if rez:
-                    self.exit_code = rez.pop()
+                    self.exit_code = rez.pop().strip()
+                    if self.exit_code.isdigit():
+                        self.exit_code = int(self.exit_code)
+                    elif self.exit_code == "True":
+                        self.exit_code = True
+                    elif self.exit_code == "False":
+                        self.exit_code = False
                 break
             elif line == "":
                 continue
@@ -60,31 +66,3 @@ class Q2Terminal:
 
     def close(self):
         self.proc.terminate()
-
-
-if __name__ == "__main__":
-    q2t = Q2Terminal()
-
-    # print(q2t.run("$q2 = 123"))
-    # print(q2t.run("echo $q2"))
-    # print(q2t.run("git status"))
-    # print(q2t.exit_code)
-
-    # print(q2t.run("pwd"))
-    # print(q2t.run("pushd"))
-    # print(q2t.run("cd \\"))
-    # print(q2t.run("pwd"))
-    # print(q2t.run("popd"))
-    print(q2t.run("cd C:/Users/andre/Documents/penta.new.local/"))
-    print(q2t.run("pwd", echo=1))
-
-    def cb(line):
-        print(line)
-        if "tarting as process" in line:
-            sys.exit(100)
-
-    print(q2t.run("cmd /c penta.exe", callback=cb))
-    print(q2t.run("py3 --version", echo=1))
-    print(q2t.exit_code)
-
-    q2t.close()
