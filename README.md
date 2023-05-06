@@ -1,3 +1,4 @@
+[![Python application](https://github.com/AndreiPuchko/q2terminal/actions/workflows/main.yml/badge.svg)](https://github.com/AndreiPuchko/q2terminal/actions/workflows/main.yml)
 # Interaction with a terminal session
 
 ```python
