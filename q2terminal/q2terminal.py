@@ -7,19 +7,15 @@ class Q2Terminal:
     def __init__(self, terminal=None, echo=False, callback=None):
         self.echo = False
         self.callback = None
-        self.shell = False
         if terminal is None:
             if "win32" in sys.platform:
                 terminal = "powershell"
             elif "darwin" in sys.platform:
                 terminal = "zsh"
             else:
-                terminal = "/bin/bash"
-        if "win32" not in sys.platform:
-            self.shell = True
+                terminal = "bash"
         self.proc = Popen(
             [terminal],
-            shell=self.shell,
             stdin=PIPE,
             stdout=PIPE,
             stderr=STDOUT,
