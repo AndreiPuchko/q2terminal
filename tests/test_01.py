@@ -14,7 +14,10 @@ def test_01_01():
 
 def test_01_02():
     t = Q2Terminal(echo=True)
-    assert t.run("$q2 = 123") == []
+    if "win32" in sys.platform:
+        assert t.run("$q2 = 123") == []
+    else:
+        assert t.run("q2 = 123") == []
     assert t.run("echo $q2") == ["123"]
     t.close()
 
