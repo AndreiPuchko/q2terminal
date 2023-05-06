@@ -26,20 +26,19 @@ def test_01_03():
     t = Q2Terminal()
     if "win32" in sys.platform:
         current_folder = t.run("pwd")[2]
-    else:
-        current_folder = t.run("pwd")[0]
-    t.run("pushd")
-    t.run("cd /")
-    t.run("pwd", echo=1)
-
-    t.run("pwd 1")
-    print(t.exit_code)
-    assert t.exit_code != 0
-
-    t.run("popd")
-    if "win32" in sys.platform:
+        t.run("pushd")
+        t.run("cd /")
+        t.run("pwd", echo=1)
+        t.run("pwd 1")
+        print(t.exit_code)
+        assert t.exit_code != 0
+        t.run("popd")
         assert t.run("pwd")[2] == current_folder
     else:
+        current_folder = t.run("pwd")[0]
+        t.run("pushd /")
+        t.run("pwd", echo=1)
+        t.run("popd")
         assert t.run("pwd")[0] == current_folder
 
 
