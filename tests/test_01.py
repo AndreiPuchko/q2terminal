@@ -17,14 +17,17 @@ def test_01_02():
     if "win32" in sys.platform:
         assert t.run("$q2 = 123") == []
     else:
-        assert t.run("q2 = 123") == []
+        assert t.run("q2=123") == []
     assert t.run("echo $q2") == ["123"]
     t.close()
 
 
 def test_01_03():
     t = Q2Terminal()
-    current_folder = t.run("pwd")[2]
+    if "win32" in sys.platform:
+        current_folder = t.run("pwd")[2]
+    else:
+        current_folder = t.run("pwd")[0]
     t.run("pushd")
     t.run("cd /")
     t.run("pwd", echo=1)
@@ -34,7 +37,10 @@ def test_01_03():
     assert t.exit_code != 0
 
     t.run("popd")
-    assert t.run("pwd")[2] == current_folder
+    if "win32" in sys.platform:
+        assert t.run("pwd")[2] == current_folder
+    else:
+        assert t.run("pwd")[0] == current_folder
 
 
 def test_01_04():
