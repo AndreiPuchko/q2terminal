@@ -38,7 +38,8 @@ class Q2Terminal:
         self.proc.stdin.writelines([bytes(cmd, "utf8")])
         self.proc.stdin.flush()
         rez = []
-        first_line = True
+        # skip first line of output for Windows powershell
+        first_line = True if "win32" in sys.platform else False
         while self.proc.poll() is None:
             line = self.proc.stdout.readline().decode("utf8").rstrip()
             if not line:
