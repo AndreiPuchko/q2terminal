@@ -16,7 +16,7 @@ class Q2Terminal:
             else:
                 terminal = "/bin/bash"
         if "win32" not in sys.platform:
-            self.shell =  True
+            self.shell = True
         self.proc = Popen(
             [terminal],
             shell=self.shell,
@@ -53,9 +53,9 @@ class Q2Terminal:
                     if self.exit_code.isdigit():
                         self.exit_code = int(self.exit_code)
                     elif self.exit_code == "True":
-                        self.exit_code = True
+                        self.exit_code = 0
                     elif self.exit_code == "False":
-                        self.exit_code = False
+                        self.exit_code = 1
                 break
             elif line == "":
                 continue

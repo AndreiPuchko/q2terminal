@@ -5,9 +5,9 @@ import sys
 def test_01_01():
     t = Q2Terminal()
     t.run(r"pwd", echo=True)
-    assert t.exit_code is True
+    assert t.exit_code == 0
     print(t.run("git status"))
-    assert t.exit_code is True
+    assert t.exit_code == 0
     assert "q2terminal.py" in " ".join(t.run("ls q2terminal/*.py"))
     t.close()
 
@@ -27,7 +27,8 @@ def test_01_03():
     t.run("pwd", echo=1)
 
     t.run("pwd 1")
-    assert t.exit_code is False
+    print(t.exit_code)
+    assert t.exit_code != 0
 
     t.run("popd")
     assert t.run("pwd")[2] == current_folder
@@ -42,17 +43,17 @@ def test_01_04():
 
     t = Q2Terminal()
     t.run("ls", callback=cb)
-    if t.exit_code is True:
+    if t.exit_code == 0:
         print(files)
 
 
 def test_01_05():
     t = Q2Terminal()
     t.run("programm", echo=True)
-    assert t.exit_code is False
+    assert t.exit_code != 0
     if "win32" in sys.platform:
         t.run("notepad")
-        assert t.exit_code is True
+        assert t.exit_code == 0
 
 
 if __name__ == "__main__":
