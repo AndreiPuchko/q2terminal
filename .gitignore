@@ -2,3 +2,4 @@ dist/
 __pycache__/
 q2terminal/__pycache__/*
 *.pyc
+q2terminal/__pycache__/q2terminal.cpython-311.pyc

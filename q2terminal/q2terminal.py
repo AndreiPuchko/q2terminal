@@ -15,7 +15,7 @@ class Q2Terminal:
                 terminal = "zsh"
             else:
                 terminal = "bash"
-        if "win32" not in sys.platform:
+        if "win32" in sys.platform:
             self.shell = True
         self.proc = Popen(
             [terminal],
@@ -65,7 +65,7 @@ class Q2Terminal:
                 if echo or self.echo:
                     print(f"{ctime()}:\t{line}")
                 if callable(_callback):
-                    callback(line)
+                    _callback(line)
 
         return rez
 
