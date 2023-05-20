@@ -71,3 +71,19 @@ class Q2Terminal:
 
     def close(self):
         self.proc.terminate()
+
+
+if __name__ == "__main__":
+    class m:
+        def __init__(self):
+            self.stdout = sys.stdout
+        def write(self, text):
+            self.stdout.write(text)
+        def flush(self):
+            self.stdout.flush()
+
+    sys.stdout = m()
+    print(123)
+    t = Q2Terminal(echo=True)
+    t.run("ls")
+    t.close()
