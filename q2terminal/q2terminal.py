@@ -9,7 +9,7 @@ class Q2Terminal:
         self.echo = False
         self.callback = None
         self.shell = False
-        self.locale_encoding = locale.getencoding()
+        self.locale_encoding = locale.getpreferredencoding(False)
         if terminal is None:
             if "win32" in sys.platform:
                 terminal = "powershell"
