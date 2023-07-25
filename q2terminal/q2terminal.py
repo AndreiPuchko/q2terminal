@@ -2,6 +2,7 @@ import sys
 from subprocess import Popen, PIPE, STDOUT
 from time import ctime
 import locale
+import os
 
 
 class Q2Terminal:
@@ -10,6 +11,7 @@ class Q2Terminal:
         self.callback = None
         self.shell = False
         self.locale_encoding = locale.getpreferredencoding(False)
+        self.locale_encoding = os.device_encoding(1)
         if terminal is None:
             if "win32" in sys.platform:
                 terminal = "powershell"
