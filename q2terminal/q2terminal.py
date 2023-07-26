@@ -6,7 +6,7 @@ import locale
 
 class Q2Terminal:
     def __init__(
-        self, terminal=None, echo=False, callback=None, encoding=locale.getencoding()
+        self, terminal=None, echo=False, callback=None, encoding=locale.getpreferredencoding()
     ):
         self.echo = False
         self.callback = None
