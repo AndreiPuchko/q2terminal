@@ -34,10 +34,14 @@ class Q2Terminal:
         self.exit_code = None
 
     def run(self, cmd="", echo=False, callback=None):
+        if len(cmd) <= 0:
+            return ""
         if echo or self.echo:
             print(f"{ctime()}> {cmd}>")
         _callback = callback if callback else self.callback
         self.exit_code = None
+        if cmd[0] in ('"', "'") and "win32" in sys.platform:
+            cmd = f"&{cmd}"
         cmd = f"{cmd}; echo $?;echo q2eoc\n"
         self.proc.stdin.writelines([bytes(cmd, "utf8")])
         self.proc.stdin.flush()

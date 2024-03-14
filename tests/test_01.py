@@ -60,7 +60,7 @@ def test_01_05():
     t.run("programm", echo=True)
     assert t.exit_code != 0
     if "win32" in sys.platform:
-        t.run("notepad")
+        t.run("'notepad'")
         assert t.exit_code == 0
 
 
